@@ -1,6 +1,7 @@
 <template>
 	<div class="home">
 		<p>{{ name }} is the {{ role }} of Deviluke.</p>
+		<button @click="handleClick">Click</button>
 	</div>
 </template>
 
@@ -11,7 +12,11 @@ export default {
 		let name = 'Lala';
 		let role = 'Princess';
 
-		return { name, role };
+		const handleClick = () => {
+			console.log('button clicked.');
+		};
+
+		return { name, role, handleClick };
 	}
 };
 </script>
