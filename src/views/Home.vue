@@ -3,6 +3,8 @@
 		<h1>Home</h1>
 		<p ref="p">{{ name }} is the {{ role }} of Deviluke.</p>
 		<button @click="handleClick">Click</button>
+		<button @click="role = 'New Princess'">Make Her Princess</button>
+		<input type="text" v-model="name" />
 	</div>
 </template>
 
@@ -14,13 +16,12 @@ export default {
 		const p = ref(null);
 		console.log(p, p.value);
 
-		let name = 'Lala';
-		let role = 'Princess';
+		const name = ref('Lala');
+		const role = ref('Princess');
 
 		const handleClick = () => {
-			console.log(p, p.value);
-			p.value.classList.add('test');
-			p.value.textContent = 'Hello, Yukki!';
+			name.value = 'Momo';
+			role.value = 'daughter of the King';
 		};
 
 		return { name, role, handleClick, p };
