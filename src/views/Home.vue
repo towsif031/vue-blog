@@ -1,30 +1,33 @@
 <template>
 	<div class="home">
 		<h1>Home</h1>
-		<p ref="p">{{ name }} is the {{ role }} of Deviluke.</p>
-		<button @click="handleClick">Click</button>
-		<button @click="role = 'New Princess'">Make Her Princess</button>
-		<input type="text" v-model="name" />
+		<input type="text" v-model="search" />
+		<p>searching for : [ {{ search }} ]</p>
+		<div v-for="name in matchingNames" :key="name">{{ name }}</div>
 	</div>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity';
+import { computed, ref } from '@vue/reactivity';
 export default {
 	name: 'Home',
 	setup() {
-		const p = ref(null);
-		console.log(p, p.value);
+		const search = ref('');
+		const names = ref([
+			'Lala',
+			'Kotegawa',
+			'Yami',
+			'Mai',
+			'Yui',
+			'Asuna',
+			'Megumin'
+		]);
 
-		const name = ref('Lala');
-		const role = ref('Princess');
+		const matchingNames = computed(() => {
+			return names.value.filter((name) => name.includes(search.value));
+		});
 
-		const handleClick = () => {
-			name.value = 'Momo';
-			role.value = 'daughter of the King';
-		};
-
-		return { name, role, handleClick, p };
+		return { names, search, matchingNames };
 	}
 };
 </script>
