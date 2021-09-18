@@ -1,33 +1,24 @@
 <template>
 	<div class="home">
 		<h1>Home</h1>
-		<input type="text" v-model="search" />
-		<p>searching for : [ {{ search }} ]</p>
-		<div v-for="name in matchingNames" :key="name">{{ name }}</div>
+		<PostList :posts="posts" />
 	</div>
 </template>
 
 <script>
-import { computed, ref } from '@vue/reactivity';
+import PostList from '../components/PostList.vue';
+import { ref } from '@vue/reactivity';
+
 export default {
 	name: 'Home',
+	components: { PostList },
 	setup() {
-		const search = ref('');
-		const names = ref([
-			'Lala',
-			'Kotegawa',
-			'Yami',
-			'Mai',
-			'Yui',
-			'Asuna',
-			'Megumin'
+		const posts = ref([
+			{ title: 'welcome to the blog', body: 'Lorem ipsum', id: 1 },
+			{ title: 'top 5 CSS tips', body: 'lorem ipsum', id: 2 }
 		]);
 
-		const matchingNames = computed(() => {
-			return names.value.filter((name) => name.includes(search.value));
-		});
-
-		return { names, search, matchingNames };
+		return { posts };
 	}
 };
 </script>
